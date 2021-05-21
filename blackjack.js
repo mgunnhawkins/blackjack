@@ -1,5 +1,37 @@
 //TODO IMPORTS NEEDED
 const input = require('readline-sync');
+class Game{
+    
+    //has
+    constructor(){
+        this.deck = new Deck()
+        this.deal()
+        // this.players = players
+        // this.total = total
+    }
+    //do
+    //first deal method
+        //player gets 2 cards from deck
+            //cards get pushed into blank array named player hand
+            //cards get removed from deck
+            //print out player hand: (player hand array)
+            //print out total
+        //dealer gets 1 card from deck
+            //card gets pushed to empty array named dealer hand
+            //card gets removed from deck
+            //print out Dealer hand: (dealer hand array)
+            //print out total
+    deal(){
+        let randomNum = Math.floor(Math.random() * this.deck.cards.length)
+        console.log(randomNum)
+        let randomCards = this.deck.cards
+        //delete an item at a particular index OR shuffle
+    
+
+    }
+}
+
+
 
 class Card {
     constructor(suit, value){
@@ -14,9 +46,10 @@ class Card {
    
 }
   
-class Deck{
+class Deck {
     constructor(){
         this.cards = []
+        this.createDeck()
     }
     createDeck() {
         let cards = []
@@ -25,12 +58,29 @@ class Deck{
         let values = [1,2,3,4,5,6,7,8,9,10,10,10,10]
         suits.forEach(function(suit) {
             for(let i=0; i < ranks.length; i++){
-                this.cards.push({suit:suit, rank:ranks[i], value:values[i]})
+                cards.push({suit:suit, rank:ranks[i], value:values[i]})
             }
         });
-        return this.cards 
+        this.cards = cards
+    }
+    shuffle(){
+        //google how to shuffle elements in an array in JS
     }   
 }
+
+    
+let playGame = new Game()
+
+
+    
+    //hand
+    //total   
+    //hit method
+    //stay method
+
+
+
+
   
     
    
