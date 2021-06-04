@@ -1,4 +1,3 @@
-//TODO IMPORTS NEEDED
 const input = require('readline-sync');
 class Game {
 
@@ -6,6 +5,8 @@ class Game {
     constructor() {
         this.deck = new Deck()
         this.deck.shuffle()
+        this.players = [new Player()]
+        this.dealerHand = []
 
 
 
@@ -15,21 +16,21 @@ class Game {
 
     dealCard() {
         let card = this.deck.cards.pop();
-        console.log(card)
-            //return 1 card
+        //console.log(card)
+        return card
+        //card is an object
+    }
+    //creates a dealerHand by pushing 1 card to the dealerHand
+    makeDealerHand(){
+        let dealerHand = this.dealerHand
+        dealerHand.push(this.dealCard())
+        console.log(dealerHand)
     }
 
-    //print out player hand: (player hand array)
-    //print out total
-    //dealer gets 1 card from deck
-    //card gets pushed to empty array named dealer hand
-    //card gets removed from deck
-    //print out Dealer hand: (dealer hand array)
-    //print out total
-}
+} //end of Game Class
 
 
-
+//creates a card
 class Card {
     constructor(suit, value) {
         this.suit = suit
@@ -48,6 +49,8 @@ class Deck {
         this.cards = []
         this.createDeck()
     }
+
+    //creates a deck of cards
     createDeck() {
         let cards = []
         let suits = ["club", "heart", "spade", "diamond"]
@@ -60,25 +63,62 @@ class Deck {
         });
         this.cards = cards
     }
+
+    //shuffles a deck of cards
     shuffle() {
         this.cards = this.cards.sort(() => Math.random() - 0.5)
     }
 } //end of Deck Class
 
 class Player {
+    constructor() {
+        this.hand = []
+        this.playerNum = 0
+        // this.hit = hit()
+    }
 
+    //pushes 1 card into the player's hand
+    makeHand(){
+        let playerHand = this.hand
+        playerHand.push(game.dealCard())
+    }
+
+    //uses makeHand() to push 2 cards int the players hand
+    firstDeal(){
+        while (this.hand.length < 2) {
+            this.makeHand()
+        }
+        console.log(this.hand)
+    }
+
+    // hit() {
+
+
+    // }
+
+ 
+
+    //does
+    //this.hit
+    //this.stay
 }
 
 let game = new Game()
-game.dealCard();
+console.log(`This is the dealerHand: `)
+game.makeDealerHand()
+console.log(`This is the playerHand: `)
+let player = new Player()
+player.firstDeal()
 
 
 
 
-//hand
+
 //total   
 //hit method
 //stay method
+//logic for handling Ace
+
 
 
 
