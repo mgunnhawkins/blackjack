@@ -69,24 +69,22 @@ class Game {
 
 
     play(){
-        console.log("Welcome to Blackjack!\n")
-        console.log(`This is the dealerHand: `)
-        this.makeDealerHand() 
-        console.log(`\n This is the playerHand: `)
-        let player = new Player()
-        player.firstDeal()
-        console.log(player.hand)
-        player.calculateTotal()
-        console.log(`\nThis is your total:`)
-        console.log(player.total)
-        if (player.hitChoice() == true){
-            player.hit()
-        } else {
+            console.log("Welcome to Blackjack!\n")
+            console.log(`This is the dealerHand: `)
+            this.makeDealerHand() 
+            console.log(`\n This is the playerHand: `)
+            let player = new Player()
+            player.firstDeal()
+            console.log(player.hand)
+            player.calculateTotal()
+            console.log(`\nThis is your total:`)
+            console.log(player.total)
+            while (player.hitChoice() == true){
+                player.hit()
+            } 
             this.dealerPlay()
         }
         
-        
-    }
      playAgain(){
         let playChoice = input.question("\nDo you want to play again? ")
          if (playChoice == "no") {
@@ -174,10 +172,8 @@ class Player {
         let hitChoice = input.question("\n Do you want to hit or stay? ")
         
        if (hitChoice == "hit"){
-            console.log("pretzel")
             return true;
         } else if (hitChoice == "stay") {
-            console.log("cheese")
             return false;
         }
     }
@@ -196,7 +192,7 @@ class Player {
                 console.log("Congrats!  You win!")
                 game.playAgain()
             } else if (this.total < 21){
-                this.hit()
+                this.hitChoice()
             }
     }
 
