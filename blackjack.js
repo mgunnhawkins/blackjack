@@ -47,12 +47,14 @@ class Game {
     }
     dealerPlay(){
         do {
-            console.log(`This is the dealer's hand:`)
+            console.log(`\n This is the dealer's hand:`)
             this.makeDealerHand()
-            console.log(`This is the dealer's total:`)
+            console.log(`\n This is the dealer's total:`)
             this.calculateDealerTotal()
-            console.log(this.dealerTotal)
         } while(this.dealerTotal < 17);
+
+        
+
 
         if (this.dealerTotal > 21){
             console.log(`The dealer's total is over 21.  You win!`)
@@ -66,17 +68,16 @@ class Game {
     }
 
 
-
-
     play(){
+        console.log("Welcome to Blackjack!\n")
         console.log(`This is the dealerHand: `)
-        this.makeDealerHand()
-        console.log(`This is the playerHand: `)
+        this.makeDealerHand() 
+        console.log(`\n This is the playerHand: `)
         let player = new Player()
         player.firstDeal()
         console.log(player.hand)
         player.calculateTotal()
-        console.log(`This is your total:`)
+        console.log(`\nThis is your total:`)
         console.log(player.total)
         if (player.hitChoice() == true){
             player.hit()
@@ -87,7 +88,7 @@ class Game {
         
     }
      playAgain(){
-        let playChoice = input.question("Do you want to play again? ")
+        let playChoice = input.question("\nDo you want to play again? ")
          if (playChoice == "no") {
              console.log("Thanks for playing!")
          } else {
@@ -170,7 +171,7 @@ class Player {
 
 
     hitChoice(){
-        let hitChoice = input.question("Do you want to hit or stay? ")
+        let hitChoice = input.question("\n Do you want to hit or stay? ")
         
        if (hitChoice == "hit"){
             console.log("pretzel")
