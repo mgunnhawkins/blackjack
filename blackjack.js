@@ -17,7 +17,6 @@ class Game {
 
     dealCard() {
         let card = this.deck.cards.pop();
-        //console.log(card)
         return card
         //card is an object
     }
@@ -25,8 +24,6 @@ class Game {
     makeDealerHand(){
         let dealerHand = this.dealerHand
         dealerHand.push(this.dealCard())
-        console.log(dealerHand)
-
     }
 
     calculateDealerTotal(){
@@ -47,15 +44,15 @@ class Game {
     }
     dealerPlay(){
         do {
-            console.log(`\n This is the dealer's hand:`)
             this.makeDealerHand()
-            console.log(`\n This is the dealer's total:`)
             this.calculateDealerTotal()
         } while(this.dealerTotal < 17);
 
+        console.log(`\n This is the dealer's hand:`)
+        this.dealerHand.forEach(card => console.log(card.rank, "of", card.suit))
+        console.log(`\n This is the dealer's total:`)
+        console.log(this.dealerTotal)
         
-
-
         if (this.dealerTotal > 21){
             console.log(`The dealer's total is over 21.  You win!`)
             this.playAgain()
@@ -72,10 +69,10 @@ class Game {
             console.log("Welcome to Blackjack!\n")
             console.log(`This is the dealerHand: `)
             this.makeDealerHand() 
+            this.dealerHand.forEach(card => console.log(card.rank, "of", card.suit))
             console.log(`\n This is the playerHand: `)
             let player = new Player()
             player.firstDeal()
-            console.log(player.hand)
             player.calculateTotal()
             console.log(`\nThis is your total:`)
             console.log(player.total)
@@ -106,8 +103,7 @@ class Card {
         this.value = value
     }
 
-    //user will see suit and rank
-    //total will use value instead of rank
+    
     //ace is 1 or 11
 
 } //end of card class
@@ -121,7 +117,7 @@ class Deck {
     //creates a deck of cards
     createDeck() {
         let cards = []
-        let suits = ["club", "heart", "spade", "diamond"]
+        let suits = ["clubs", "hearts", "spades", "diamonds"]
         let ranks = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"]
         let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
         suits.forEach(function(suit) {
@@ -150,6 +146,7 @@ class Player {
     makeHand(){
         let playerHand = this.hand
         playerHand.push(game.dealCard())
+        
     }
 
    
@@ -157,6 +154,7 @@ class Player {
     firstDeal(){
        this.makeHand()
        this.makeHand()
+       this.hand.forEach(card => console.log(card.rank, "of", card.suit))
     }
    
     
@@ -179,9 +177,10 @@ class Player {
     }
 
     hit(){
-        console.log(`This is your new hand:`)
+        
             this.makeHand()
-            console.log(this.hand)
+            console.log(`This is your new hand:`)
+            this.hand.forEach(card => console.log(card.rank, "of", card.suit) )
             console.log(`This is your new total:`)
             this.calculateTotal()
             console.log(this.total)
