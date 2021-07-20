@@ -29,24 +29,18 @@ class Game {
     calculateDealerTotal(){
         this.dealerTotal = 0;
         for (let card of this.dealerHand){
-            this.dealerTotal = card.value + this.dealerTotal
+            this.dealerTotal = card.value + this.dealerTotal    
         }
+        return this.dealerTotal
     }
 
-    compareTotals(){
-        if (this.dealerTotal > Player.total){
-            console.log(`Bust!  You lose.`)
-            this.playAgain()
-        } else {
-            console.log(`You win!`)
-            this.playAgain()
-        }
-    }
+    
     dealerPlay(){
-        do {
+        
+        while (this.dealerTotal < 17){
             this.makeDealerHand()
             this.calculateDealerTotal()
-        } while(this.dealerTotal < 17);
+        } 
 
         console.log(`\n This is the dealer's hand:`)
         this.dealerHand.forEach(card => console.log(card.rank, "of", card.suit))
@@ -59,7 +53,7 @@ class Game {
         } else if (this.dealerTotal == 21){
             console.log(`Dealer's total is 21.  You lose.`)
             this.playAgain()
-        } else if (this.dealerTotal > 17 && this.dealerTotal < 21) {
+        } else if (this.dealerTotal >= 17 && this.dealerTotal < 21) {
             this.compareTotals()
         }
     }
@@ -76,12 +70,19 @@ class Game {
             player.calculateTotal()
             console.log(`\nThis is your total:`)
             console.log(player.total)
-            while (player.hitChoice() == true){
-                player.hit()
-            } 
-            this.dealerPlay()
+            player.hit()
         }
-        
+
+    compareTotals(){
+        if (this.dealerTotal > Player.total){
+            console.log(`Bust!  You lose.`)
+            this.playAgain()
+        } else {
+            console.log(`You win!`)
+            this.playAgain()
+        }
+    }
+    
      playAgain(){
         let playChoice = input.question("\nDo you want to play again? ")
          if (playChoice == "no") {
@@ -166,18 +167,11 @@ class Player {
     }
 
 
-    hitChoice(){
-        let hitChoice = input.question("\n Do you want to hit or stay? ")
-        
-       if (hitChoice == "hit"){
-            return true;
-        } else if (hitChoice == "stay") {
-            return false;
-        }
-    }
+    
 
     hit(){
-        
+        let hitChoice = input.question("\n Do you want to hit or stay? ")
+        if (hitChoice == "hit"){
             this.makeHand()
             console.log(`This is your new hand:`)
             this.hand.forEach(card => console.log(card.rank, "of", card.suit) )
@@ -191,8 +185,18 @@ class Player {
                 console.log("Congrats!  You win!")
                 game.playAgain()
             } else if (this.total < 21){
-                this.hitChoice()
+                this.hit()
             }
+        } else if (hitChoice == "stay") {
+            game.dealerPlay()
+        } else {
+            console.log("Please type 'hit' or 'stay'")
+            this.hit()
+        }
+
+
+        
+            
     }
 
 
